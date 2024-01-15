@@ -1,7 +1,7 @@
 import { DEFAULT_LOGIN_STATE, loginState } from "@/recoil";
 import { useRecoilValueClient } from "@/hooks/recoil";
 import DashboardScreen from "@/screens/DashboardScreen";
-import AuthenticationScreen from "@/screens/AuthenticationScreen";
+import WelcomeScreen from "@/screens/WelcomeScreen";
 
 const HomePage = () => {
   const isLoggedIn = useRecoilValueClient(loginState, DEFAULT_LOGIN_STATE);
@@ -10,7 +10,7 @@ const HomePage = () => {
     return <DashboardScreen />;
   }
 
-  return <AuthenticationScreen />;
+  return <WelcomeScreen />;
 };
 
 export default HomePage;
