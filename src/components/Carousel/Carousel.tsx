@@ -6,17 +6,23 @@ import "keen-slider/keen-slider.min.css";
 type CarouselProps = {
   slides: FC[];
   className?: string;
+  withDots?: boolean;
   autoSwitch?: boolean;
   infinite?: boolean;
   switchTimeout?: number;
+  lockSwitching?: boolean;
+  changeSlide?: () => void;
 };
 
 const Carousel = ({
   slides,
   className,
+  withDots,
   autoSwitch,
-  infinite = true,
+  infinite,
   switchTimeout = 5000,
+  lockSwitching,
+  changeSlide,
 }: CarouselProps) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [loaded, setLoaded] = useState(false);
@@ -24,7 +30,8 @@ const Carousel = ({
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>(
     {
       initial: 0,
-      loop: infinite ? true : false,
+      loop: infinite,
+      disabled: lockSwitching,
       slideChanged(slider) {
         setCurrentSlide(slider.track.details.rel);
       },
@@ -79,7 +86,7 @@ const Carousel = ({
       </div>
 
       {/* Dots */}
-      {loaded && instanceRef.current && (
+      {withDots && loaded && instanceRef.current && (
         <div className="absolute top-5 left-5 flex items-center">
           {Array.from(
             { length: instanceRef.current.track.details.slides.length },

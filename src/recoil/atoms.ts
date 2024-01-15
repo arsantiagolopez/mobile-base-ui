@@ -9,10 +9,7 @@ export const loginState = atom({
   effects: [persistInLocalStorage("loginState")],
 });
 
-export const DEFAULT_ONBOARDING_STATE = false;
-
 export const onboardingState = atom({
   key: "onboardingState",
-  default: DEFAULT_ONBOARDING_STATE,
-  effects: [persistInLocalStorage("onboardingState")],
+  default: true,
 });

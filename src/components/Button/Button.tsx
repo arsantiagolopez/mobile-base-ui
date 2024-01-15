@@ -1,14 +1,59 @@
 import type { ButtonHTMLAttributes, DetailedHTMLProps, ReactNode } from "react";
 import clsx from "clsx";
 
+type VariantType = "solid" | "outline" | "unstyled";
+type ThemeType = "dark" | "light";
+
+const getButtonClasses = (
+  variant: VariantType,
+  theme: ThemeType,
+  disabled?: boolean
+) => {
+  const defaultClasses = "text-sm rounded-xl p-2";
+  const interactiveStyles = !disabled
+    ? {
+        solid: {
+          dark: "hover:bg-gray-300 active:bg-gray-400",
+          light: "hover:bg-neutral-900 active:bg-neutral-950",
+        },
+        outline: {
+          dark: "hover:border-white hover:text-white active:text-gray-400 active:border-gray-400",
+          light: "active:text-gray-600 active:border-gray-600",
+        },
+      }
+    : {};
+
+  const variantStyles = {
+    solid: {
+      dark: clsx("bg-white text-black", interactiveStyles.solid?.dark),
+      light: clsx("bg-secondary text-white", interactiveStyles.solid?.light),
+    },
+    outline: {
+      dark: clsx(
+        "border border-[1.5px] border-tertiarty text-tertiary",
+        interactiveStyles.outline?.dark
+      ),
+      light: clsx(
+        "border border-[1.5px] border-gray-400 text-gray-400",
+        interactiveStyles.outline?.light
+      ),
+    },
+  };
+
+  return (
+    variant !== "unstyled" &&
+    clsx(defaultClasses, variantStyles[variant][theme])
+  );
+};
+
 type ButtonProps = DetailedHTMLProps<
   ButtonHTMLAttributes<HTMLButtonElement>,
   HTMLButtonElement
 > & {
   children: ReactNode;
   className?: string;
-  variant?: "solid" | "outline";
-  theme?: "dark" | "light";
+  variant?: VariantType;
+  theme?: ThemeType;
 };
 
 const Button = ({
@@ -18,33 +63,13 @@ const Button = ({
   theme = "dark",
   ...props
 }: ButtonProps) => {
-  const defaultClasses = "rounded-md text-sm p-2";
+  const { disabled } = props;
 
-  const defaultOutlineClasses =
-    "border hover:-ml-px hover:-mt-px hover:border-2";
-
-  const variantClass = {
-    solid: {
-      dark: "bg-white text-black hover:bg-gray-300 active:bg-gray-400",
-      light: "bg-gray-700 text-white hover:bg-gray-800 active:bg-gray-900",
-    },
-    outline: {
-      dark: clsx(
-        defaultOutlineClasses,
-        "border-white text-white active:text-gray-400 active:border-gray-400"
-      ),
-      light: clsx(
-        defaultOutlineClasses,
-        "border-gray-400 text-gray-400 active:text-gray-600 active:border-gray-600"
-      ),
-    },
-  };
+  const buttonClasses = getButtonClasses(variant, theme, disabled);
+  const cursorClass = disabled ? "cursor-default" : "cursor-pointer";
 
   return (
-    <button
-      className={clsx(defaultClasses, variantClass[variant][theme], className)}
-      {...props}
-    >
+    <button className={clsx(cursorClass, buttonClasses, className)} {...props}>
       {children}
     </button>
   );
