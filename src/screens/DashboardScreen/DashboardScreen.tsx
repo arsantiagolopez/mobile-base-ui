@@ -1,7 +1,7 @@
 type DashboardScreenProps = {};
 
 const DashboardScreen = ({}: DashboardScreenProps) => {
-  return <div className="">Test</div>;
+  return <div className="p-6">Dashboard</div>;
 };
 
 export default DashboardScreen;

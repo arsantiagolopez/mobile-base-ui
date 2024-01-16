@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { type RecoilState, useRecoilState, type SetterOrUpdater } from "recoil";
+import { type RecoilState, type SetterOrUpdater, useRecoilState } from "recoil";
 
 export const useRecoilStateClient = <T>(
   state: RecoilState<T>,

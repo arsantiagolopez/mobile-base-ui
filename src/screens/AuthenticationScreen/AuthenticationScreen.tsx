@@ -11,8 +11,9 @@ const AuthenticationScreen = ({}: AuthenticationScreenProps) => {
     <div className="relative">
       <Carousel
         slides={[FirstSlide, SecondSlide, ThirdSlide]}
-        // autoSwitch
-        switchTimeout={10000}
+        withDots
+        autoSwitch
+        switchTimeout={5000}
       />
       <ActionButtons />
     </div>
