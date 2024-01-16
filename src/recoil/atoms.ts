@@ -9,10 +9,28 @@ export const loginState = atom({
   effects: [persistInLocalStorage("loginState")],
 });
 
-export const DEFAULT_ONBOARDING_STATE = false;
+export const onboardingSlideState = atom({
+  key: "onboardingSlideState",
+  default: 0,
+});
 
-export const onboardingState = atom({
-  key: "onboardingState",
-  default: DEFAULT_ONBOARDING_STATE,
-  effects: [persistInLocalStorage("onboardingState")],
+export const loginSlideState = atom({
+  key: "loginSlideState",
+  default: 0,
+});
+
+export const DEFAULT_EMAIL_STATE = "";
+
+export const emailState = atom({
+  key: "emailState",
+  default: DEFAULT_EMAIL_STATE,
+  effects: [persistInLocalStorage("emailState")],
+});
+
+export const DEFAULT_USERNAME_STATE = "";
+
+export const usernameState = atom({
+  key: "usernameState",
+  default: DEFAULT_EMAIL_STATE,
+  effects: [persistInLocalStorage("usernameState")],
 });
