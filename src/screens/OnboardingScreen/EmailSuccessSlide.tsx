@@ -17,7 +17,7 @@ const EmailSuccessSlide = ({}: EmailSuccessSlideProps) => {
   return (
     <Slide className="relative flex flex-col items-center justify-between p-6 py-20">
       <div className="flex flex-col items-center w-full gap-10">
-        <h1 className="headline">You're in!</h1>
+        <h1 className="headline">You&apos;re in!</h1>
 
         <Image
           alt="Slide 1"
@@ -30,12 +30,12 @@ const EmailSuccessSlide = ({}: EmailSuccessSlideProps) => {
         />
 
         <h2 className="headline-description">
-          Now let's quickly get you onboarded.
+          Now let&apos;s quickly get you onboarded.
         </h2>
       </div>
 
       <Button onClick={handleNextSlide} className="py-4 px-5">
-        Let's go
+        Let&apos;s go
       </Button>
     </Slide>
   );

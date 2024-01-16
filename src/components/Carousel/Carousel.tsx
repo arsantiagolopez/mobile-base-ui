@@ -2,7 +2,6 @@ import { type FC, useState, useEffect } from "react";
 import { useKeenSlider } from "keen-slider/react";
 import clsx from "clsx";
 import "keen-slider/keen-slider.min.css";
-import { useRecoilValue, type RecoilState } from "recoil";
 
 type CarouselProps = {
   slides: FC[];
@@ -11,7 +10,7 @@ type CarouselProps = {
   autoSwitch?: boolean;
   infinite?: boolean;
   switchTimeout?: number;
-  recoilState?: RecoilState<number>;
+  recoilSlide?: number;
 };
 
 const Carousel = ({
@@ -21,18 +20,18 @@ const Carousel = ({
   autoSwitch,
   infinite,
   switchTimeout = 5000,
-  recoilState,
+  recoilSlide,
 }: CarouselProps) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [loaded, setLoaded] = useState(false);
 
-  const recoilCurrentSlide = recoilState ? useRecoilValue(recoilState) : null;
+  const controlledSlide = typeof recoilSlide !== "undefined";
 
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>(
     {
       initial: 0,
       loop: infinite,
-      drag: !recoilState,
+      drag: controlledSlide,
       slideChanged(slider) {
         setCurrentSlide(slider.track.details.rel);
       },
@@ -78,10 +77,11 @@ const Carousel = ({
   );
 
   useEffect(() => {
-    if (typeof recoilCurrentSlide === "number") {
-      instanceRef.current?.moveToIdx(recoilCurrentSlide);
+    if (controlledSlide) {
+      instanceRef.current?.moveToIdx(recoilSlide);
     }
-  }, [recoilCurrentSlide]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [recoilSlide]);
 
   return (
     <div className={clsx("relative h-full", className)}>

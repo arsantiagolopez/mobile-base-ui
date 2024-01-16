@@ -32,7 +32,7 @@ const OnboardingSuccessSlide = ({}: OnboardingSuccessSlideProps) => {
       </Button>
 
       <div className="flex flex-col items-center w-full gap-10">
-        <h1 className="headline">That's all</h1>
+        <h1 className="headline">That&apos;s all</h1>
 
         <Image
           alt="Slide 1"

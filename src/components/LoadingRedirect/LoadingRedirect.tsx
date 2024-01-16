@@ -13,6 +13,7 @@ const LoadingRedirect = ({}: LoadingRedirectProps) => {
 
   useEffect(() => {
     navigateHome();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

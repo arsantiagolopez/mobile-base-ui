@@ -1,4 +1,5 @@
 import { onboardingSlideState } from "@/recoil";
+import { useRecoilValue } from "recoil";
 import Carousel from "@/components/Carousel";
 import EmailSlide from "./EmailSlide";
 import EmailConfirmationSlide from "./EmailConfirmationSlide";
@@ -9,6 +10,8 @@ import OnboardingSuccessSlide from "./OnboardingSuccessSlide";
 type OnboardingScreenProps = {};
 
 const OnboardingScreen = ({}: OnboardingScreenProps) => {
+  const recoilSlide = useRecoilValue(onboardingSlideState);
+
   return (
     <Carousel
       slides={[
@@ -18,7 +21,7 @@ const OnboardingScreen = ({}: OnboardingScreenProps) => {
         UsernameSlide,
         OnboardingSuccessSlide,
       ]}
-      recoilState={onboardingSlideState}
+      recoilSlide={recoilSlide}
     />
   );
 };
