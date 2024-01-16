@@ -31,7 +31,7 @@ const Carousel = ({
     {
       initial: 0,
       loop: infinite,
-      drag: controlledSlide,
+      drag: !controlledSlide,
       slideChanged(slider) {
         setCurrentSlide(slider.track.details.rel);
       },
